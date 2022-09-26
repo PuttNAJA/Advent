@@ -63,9 +63,9 @@ func damaged(var enemyposx):
 		motion.x = -50
 	elif position.x > enemyposx:
 		motion.x = 50
-	
-	Input.action_release("left")
-	Input.action_release("right")
+	#can't move when damaged
+	#Input.action_release("left")
+	#Input.action_release("right")
 	
 	hurtCD.start()
 	
