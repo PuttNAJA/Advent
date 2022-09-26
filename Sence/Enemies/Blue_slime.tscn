@@ -1,0 +1,129 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Asset/Enemy/slime-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Sence/Enemies/Blue_slime.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 13, 5.625 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8.5, 12 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 11 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "Attack"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Slime-Sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack"
+}, {
+"args": [  ],
+"method": "end_attack"
+}, {
+"args": [  ],
+"method": "start_walk"
+} ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Move"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Slime-Sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Slime-Sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4 ]
+}
+
+[node name="Blue_Slime" type="KinematicBody2D"]
+collision_layer = 16
+script = ExtResource( 5 )
+
+[node name="Slime-Sheet" type="Sprite" parent="."]
+scale = Vector2( 0.987805, 0.987805 )
+texture = ExtResource( 2 )
+hframes = 8
+vframes = 3
+frame = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 5 )
+shape = SubResource( 2 )
+
+[node name="FloorChecker" type="RayCast2D" parent="."]
+position = Vector2( -11, 0 )
+enabled = true
+cast_to = Vector2( 0, 20 )
+collision_mask = 2
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2( -11.5, -1 )
+shape = SubResource( 3 )
+
+[node name="AttackBox" type="Area2D" parent="."]
+collision_layer = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+modulate = Color( 0.160784, 0.12549, 0.733333, 1 )
+position = Vector2( -11, 0 )
+shape = SubResource( 4 )
+
+[node name="AnimationSlime" type="AnimationPlayer" parent="."]
+anims/Attack = SubResource( 9 )
+anims/Move = SubResource( 7 )
+anims/RESET = SubResource( 8 )
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_entered" from="AttackBox" to="." method="_on_AttackBox_body_entered"]
