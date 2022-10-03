@@ -1,16 +1,19 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Asset/Enemy/slime-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Sence/Enemies/Blue_slime.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 13, 5.625 )
+extents = Vector2( 12, 2.3125 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 8.5, 12 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8, 11 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 10.5, 3 )
 
 [sub_resource type="Animation" id=9]
 resource_name = "Attack"
@@ -47,6 +50,34 @@ tracks/1/keys = {
 "args": [  ],
 "method": "start_walk"
 } ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Slime-Sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 17, 18, 19, 20, 21 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -93,21 +124,21 @@ hframes = 8
 vframes = 3
 frame = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1, 5 )
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 9 )
 shape = SubResource( 2 )
 
 [node name="FloorChecker" type="RayCast2D" parent="."]
 position = Vector2( -11, 0 )
 enabled = true
-cast_to = Vector2( 0, 20 )
+cast_to = Vector2( 0, 26 )
 collision_mask = 2
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( -11.5, -1 )
+position = Vector2( -13, -1 )
 shape = SubResource( 3 )
 
 [node name="AttackBox" type="Area2D" parent="."]
@@ -120,10 +151,25 @@ modulate = Color( 0.160784, 0.12549, 0.733333, 1 )
 position = Vector2( -11, 0 )
 shape = SubResource( 4 )
 
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+modulate = Color( 0.509804, 0.945098, 0.113725, 1 )
+position = Vector2( 0.5, -1 )
+shape = SubResource( 10 )
+
 [node name="AnimationSlime" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 9 )
+anims/Die = SubResource( 11 )
 anims/Move = SubResource( 7 )
 anims/RESET = SubResource( 8 )
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="body_entered" from="AttackBox" to="." method="_on_AttackBox_body_entered"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

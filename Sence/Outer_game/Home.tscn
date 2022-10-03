@@ -1,0 +1,221 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Asset/Backgrounds/oak_woods_v1.0/background/background_layer_1.png" type="Texture" id=1]
+[ext_resource path="res://Asset/Backgrounds/oak_woods_v1.0/background/background_layer_2.png" type="Texture" id=2]
+[ext_resource path="res://Asset/Backgrounds/oak_woods_v1.0/background/background_layer_3.png" type="Texture" id=3]
+[ext_resource path="res://Asset/Font/alagard.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Asset/BUTTONS/1x/menu-1.png" type="Texture" id=5]
+[ext_resource path="res://Asset/BUTTONS/1x/Button.png" type="Texture" id=6]
+[ext_resource path="res://Asset/BUTTONS/1x/Botton_press.png" type="Texture" id=7]
+[ext_resource path="res://Asset/BUTTONS/1x/menu-2.png" type="Texture" id=9]
+[ext_resource path="res://Sence/Outer_game/SettingScreen.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Sence/Outer_game/Home.gd" type="Script" id=12]
+[ext_resource path="res://Asset/Sound/FreeSFX/GameSFX/Music/ChipWave/Retro Music - ABMU - ChipWave 01.wav" type="AudioStream" id=13]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.92549, 0.462745, 0.121569, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.152941, 0.137255, 0.270588, 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 220
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 50
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 50
+font_data = ExtResource( 4 )
+
+[node name="Home" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BackGround" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 2.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="BackGround"]
+anchor_right = 0.997
+anchor_bottom = 0.994024
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect2" type="TextureRect" parent="BackGround"]
+anchor_right = 0.999
+anchor_bottom = 0.998008
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect3" type="TextureRect" parent="BackGround"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Advent" type="Control" parent="."]
+anchor_left = -0.001
+anchor_top = -0.002
+anchor_right = 0.999
+anchor_bottom = 0.54
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Panel2" type="Panel" parent="Advent"]
+anchor_left = 0.143
+anchor_top = 0.0811808
+anchor_right = 0.888
+anchor_bottom = 0.719557
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Panel" type="Panel" parent="Advent"]
+anchor_left = 0.148
+anchor_top = 0.0442804
+anchor_right = 0.883
+anchor_bottom = 0.704797
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Advent"]
+anchor_left = 0.155
+anchor_top = 0.0184502
+anchor_right = 0.905501
+anchor_bottom = 0.830258
+custom_colors/font_color = Color( 1, 0.027451, 0.027451, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Advent"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label2" type="Label" parent="Advent"]
+anchor_left = 0.148698
+anchor_top = 0.00369004
+anchor_right = 0.899502
+anchor_bottom = 0.815638
+margin_left = 0.301987
+margin_bottom = -0.0380249
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Advent"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Play" type="TextureButton" parent="."]
+anchor_left = 0.37
+anchor_top = 0.532
+anchor_right = 0.655
+anchor_bottom = 0.698
+margin_right = -6.10352e-05
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+expand = true
+
+[node name="Plat_text" type="Label" parent="Play"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 93.0
+margin_top = 14.0
+margin_right = -98.0
+margin_bottom = -21.0
+custom_colors/font_color = Color( 0.709804, 0.0313726, 0.0313726, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Play"
+align = 1
+valign = 1
+
+[node name="Quit" type="TextureButton" parent="."]
+anchor_left = 0.368
+anchor_top = 0.738
+anchor_right = 0.655
+anchor_bottom = 0.904
+margin_left = -3.05176e-05
+margin_top = -3.05176e-05
+margin_right = -2.00006
+margin_bottom = -3.05176e-05
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+expand = true
+
+[node name="Label" type="Label" parent="Quit"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 87.0
+margin_top = 12.0
+margin_right = -101.0
+margin_bottom = -23.0
+custom_colors/font_color = Color( 0.709804, 0.0313726, 0.0313726, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "Quit"
+align = 1
+valign = 1
+
+[node name="Setting" type="TextureButton" parent="."]
+anchor_left = 0.018
+anchor_top = 0.828
+anchor_right = 0.103
+anchor_bottom = 0.976
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="SettingScreen" parent="." instance=ExtResource( 11 )]
+anchor_left = 0.508
+anchor_top = -0.034
+anchor_right = 0.508
+anchor_bottom = -0.034
+margin_left = -128.0
+margin_top = -320.0
+margin_right = 128.0
+margin_bottom = 0.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Tween" type="Tween" parent="SettingScreen"]
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -10.0
+
+[connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="Setting" to="SettingScreen" method="_on_Setting_pressed"]

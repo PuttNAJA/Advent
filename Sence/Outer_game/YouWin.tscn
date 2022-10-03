@@ -37,7 +37,7 @@ margin_right = 323.0
 margin_bottom = 197.0
 custom_colors/font_color = Color( 0.921569, 0.94902, 0.0666667, 1 )
 custom_fonts/font = SubResource( 2 )
-text = "END DEMO!!"
+text = "Congreats!!"
 align = 1
 valign = 1
 

@@ -1,16 +1,15 @@
 extends Control
 
 
-onready var restart = "res://Sence/Levels/Tutorial.tscn"
-
-func _ready():
-	pass
+onready var restart = "res://Sence/Levels/Level01.tscn"
+onready var menu = "res://Sence/Outer_game/Home.tscn"
+var change
 
 
 func _on_Playagain_pressed():
 	Globle.lives = Globle.max_lives
-	get_tree().change_scene(restart)
+	change = get_tree().change_scene(restart)
 
 
 func _on_Quit_pressed():
-	get_tree().quit()
+	change = get_tree().change_scene(menu)

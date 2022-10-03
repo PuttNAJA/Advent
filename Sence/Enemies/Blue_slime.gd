@@ -8,6 +8,8 @@ export var speed = 80
 onready var anim = $AnimationSlime
 onready var checkfloor = $FloorChecker
 onready var attackdetector = $AttackBox
+onready var cooldown = $Timer
+onready var shape = $Body
 
 func _ready():
 	anim.play("Move")
@@ -30,7 +32,7 @@ func move():
 
 
 func turn_around():
-	if not checkfloor.is_colliding() and is_on_floor():
+	if is_on_wall() or not checkfloor.is_colliding() and is_on_floor():
 		is_moving_left = !is_moving_left
 		scale.x = -scale.x
 
@@ -47,10 +49,20 @@ func start_walk():
 	anim.play("Move")
 
 
-func _on_PlayerDetector_body_entered(_body):
+func _on_PlayerDetector_body_entered(_Player):
 	anim.play("Attack")
 
 
+func _on_AttackBox_body_entered(Player):
+	Player.damaged()
 
-func _on_AttackBox_body_entered(body):
-	body.damaged(position.x)
+
+func _on_hitbox_body_entered(_Player):
+	anim.play("Die")
+	cooldown.start()
+	velocity.x = 0
+	velocity.y = 0
+
+
+func _on_Timer_timeout():
+	queue_free()

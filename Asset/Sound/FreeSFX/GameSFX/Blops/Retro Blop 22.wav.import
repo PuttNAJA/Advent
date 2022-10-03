@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Retro Blop 22.wav-ed514a897cc8f0e6f2066d59c30a065b.sample"
+
+[deps]
+
+source_file="res://Asset/Sound/FreeSFX/GameSFX/Blops/Retro Blop 22.wav"
+dest_files=[ "res://.import/Retro Blop 22.wav-ed514a897cc8f0e6f2066d59c30a065b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
