@@ -1,6 +1,7 @@
 extends CenterContainer
 
 var change
+var music_bus = AudioServer.get_bus_index("Master")
 onready var movetween = $Tween
 onready var audio = $Sound
 onready var menu = "res://Sence/Outer_game/Home.tscn"
@@ -23,6 +24,9 @@ func _on_Setting_button_pressed():
 	go_down()
 
 
-
 func _on_Main_menu_pressed():
 	change = get_tree().change_scene(menu)
+
+
+func _on_Sound_pressed():
+	AudioServer.set_bus_mute(music_bus , not AudioServer.is_bus_mute(music_bus))

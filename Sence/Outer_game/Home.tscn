@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Asset/Backgrounds/oak_woods_v1.0/background/background_layer_1.png" type="Texture" id=1]
 [ext_resource path="res://Asset/Backgrounds/oak_woods_v1.0/background/background_layer_2.png" type="Texture" id=2]
@@ -7,10 +7,15 @@
 [ext_resource path="res://Asset/BUTTONS/1x/menu-1.png" type="Texture" id=5]
 [ext_resource path="res://Asset/BUTTONS/1x/Button.png" type="Texture" id=6]
 [ext_resource path="res://Asset/BUTTONS/1x/Botton_press.png" type="Texture" id=7]
+[ext_resource path="res://Asset/Backgrounds/oak_woods_v1.0/decorations/1x/Setting.png" type="Texture" id=8]
 [ext_resource path="res://Asset/BUTTONS/1x/menu-2.png" type="Texture" id=9]
+[ext_resource path="res://Asset/Font/Planes_ValMore.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Sence/Outer_game/SettingScreen.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Sence/Outer_game/Home.gd" type="Script" id=12]
 [ext_resource path="res://Asset/Sound/FreeSFX/GameSFX/Music/ChipWave/Retro Music - ABMU - ChipWave 01.wav" type="AudioStream" id=13]
+[ext_resource path="res://Asset/UI/Icon42.png" type="Texture" id=14]
+[ext_resource path="res://Asset/BUTTONS/1x/End_Credits-2.png" type="Texture" id=15]
+[ext_resource path="res://Asset/BUTTONS/1x/End_Credits-1.png" type="Texture" id=16]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.92549, 0.462745, 0.121569, 1 )
@@ -29,6 +34,14 @@ font_data = ExtResource( 4 )
 [sub_resource type="DynamicFont" id=5]
 size = 50
 font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 70
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 35
+font_data = ExtResource( 10 )
 
 [node name="Home" type="Control"]
 anchor_right = 1.0
@@ -197,6 +210,18 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="AssetCreadit" type="TextureButton" parent="."]
+anchor_left = 0.123
+anchor_top = 0.832
+anchor_right = 0.208
+anchor_bottom = 0.98
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 15 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
 [node name="SettingScreen" parent="." instance=ExtResource( 11 )]
 anchor_left = 0.508
 anchor_top = -0.034
@@ -216,6 +241,69 @@ __meta__ = {
 stream = ExtResource( 13 )
 volume_db = -10.0
 
+[node name="Info" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 0.996
+margin_bottom = -3.05176e-05
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="Info"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = 27.0
+margin_right = -90.0
+margin_bottom = -17.0
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Asset" type="Label" parent="Info"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 341.0
+margin_top = 70.0
+margin_right = -279.0
+margin_bottom = -361.0
+custom_fonts/font = SubResource( 7 )
+text = "Asset Cradit"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="credit" type="Label" parent="Info"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 193.0
+margin_top = 175.0
+margin_right = -135.0
+margin_bottom = -131.0
+custom_fonts/font = SubResource( 6 )
+text = "Slime - rvros 
+Wolf - Admurin
+Character, Background, Tileser - brullov
+Music & Sound - Tallbeard Studios
+Button, Coin, Key, Door - Kenney.nl"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="exit" type="TextureButton" parent="Info"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 804.0
+margin_top = 16.0
+margin_right = -92.0
+margin_bottom = -392.0
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 14 )
+
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="Setting" to="SettingScreen" method="_on_Setting_pressed"]
+[connection signal="pressed" from="AssetCreadit" to="." method="_on_AssetCreadit_pressed"]
+[connection signal="pressed" from="Info/exit" to="." method="_on_exit_pressed"]

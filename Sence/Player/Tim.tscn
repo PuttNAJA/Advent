@@ -1,0 +1,106 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://Asset/Player/Tim/Idle/Idle_0000_Layer-6.png" type="Texture" id=1]
+[ext_resource path="res://Asset/Player/Tim/Idle/Idle_0001_Layer-5.png" type="Texture" id=2]
+[ext_resource path="res://Asset/Player/Tim/Idle/Idle_0002_Layer-4.png" type="Texture" id=3]
+[ext_resource path="res://Asset/Player/Tim/Idle/Idle_0003_Layer-3.png" type="Texture" id=4]
+[ext_resource path="res://Asset/Player/Tim/Idle/Idle_0005_Layer-1.png" type="Texture" id=5]
+[ext_resource path="res://Asset/Player/Tim/Idle/Idle_0004_Layer-2.png" type="Texture" id=6]
+[ext_resource path="res://Sence/Player/Tim.gd" type="Script" id=7]
+[ext_resource path="res://Asset/Player/Tim/Run/Run_0001_Layer-7.png" type="Texture" id=8]
+[ext_resource path="res://Asset/Player/Tim/Run/Run_0004_Layer-4.png" type="Texture" id=9]
+[ext_resource path="res://Asset/Player/Tim/Air/Air_0000_Layer-4.png" type="Texture" id=10]
+[ext_resource path="res://Asset/Player/Tim/Run/Run_0005_Layer-3.png" type="Texture" id=11]
+[ext_resource path="res://Asset/Player/Tim/Run/Run_0006_Layer-2.png" type="Texture" id=12]
+[ext_resource path="res://Asset/Player/Tim/Air/Air_0001_Layer-3.png" type="Texture" id=13]
+[ext_resource path="res://Asset/Player/Tim/Run/Run_0002_Layer-6.png" type="Texture" id=14]
+[ext_resource path="res://Asset/Player/Tim/Run/Run_0000_Layer-8.png" type="Texture" id=15]
+[ext_resource path="res://Asset/Player/Tim/Run/Run_0003_Layer-5.png" type="Texture" id=16]
+[ext_resource path="res://Asset/Player/Tim/Air/Air_0003_Layer-1.png" type="Texture" id=17]
+[ext_resource path="res://Asset/Player/Tim/Air/Air_0002_Layer-2.png" type="Texture" id=18]
+[ext_resource path="res://Asset/Player/Tim/Run/Run_0007_Layer-1.png" type="Texture" id=19]
+[ext_resource path="res://Asset/Player/Tim/Attack/Attack01_0002_Layer-3.png" type="Texture" id=20]
+[ext_resource path="res://Asset/Player/Tim/Attack/Attack01_0000_Layer-5.png" type="Texture" id=21]
+[ext_resource path="res://Asset/Player/Tim/Hurt/Hurt_0000_Layer-4.png" type="Texture" id=23]
+[ext_resource path="res://Asset/Player/Tim/Attack/Attack01_0001_Layer-4.png" type="Texture" id=24]
+[ext_resource path="res://Asset/Player/Tim/Hurt/Hurt_0003_Layer-1.png" type="Texture" id=25]
+[ext_resource path="res://Asset/Player/Tim/Hurt/Hurt_0002_Layer-2.png" type="Texture" id=26]
+[ext_resource path="res://Sence/MtHitBox.gd" type="Script" id=27]
+[ext_resource path="res://Sence/EnemiesHurtbox.gd" type="Script" id=28]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 13 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "Air",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 20 ), ExtResource( 24 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "Attack01",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 23 ) ],
+"loop": true,
+"name": "Hurt",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 19 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 8 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "Run",
+"speed": 8.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4, 16 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 10, 7 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 8.5, 16 )
+
+[node name="Tim" type="KinematicBody2D"]
+collision_mask = 86
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Hurt"
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.35, 0.35 )
+limit_left = 0
+limit_bottom = 180
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+
+[node name="Position2D" type="Position2D" parent="."]
+
+[node name="MyHitBox" type="Area2D" parent="Position2D"]
+script = ExtResource( 27 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/MyHitBox"]
+position = Vector2( 16, -1 )
+shape = SubResource( 5 )
+disabled = true
+
+[node name="EnemiesHurtBox" type="Area2D" parent="Position2D"]
+script = ExtResource( 28 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/EnemiesHurtBox"]
+modulate = Color( 0.662745, 0.968627, 0.435294, 1 )
+position = Vector2( -3.5, 0 )
+shape = SubResource( 6 )
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

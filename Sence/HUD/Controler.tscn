@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Asset/UI/Icon44.5.png" type="Texture" id=1]
 [ext_resource path="res://Asset/UI/Icon45.2.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Asset/UI/Icon45.png" type="Texture" id=4]
 [ext_resource path="res://Asset/UI/Icon44.png" type="Texture" id=5]
 [ext_resource path="res://Asset/UI/Icon43.png" type="Texture" id=6]
+[ext_resource path="res://Asset/Item/1x/button.png" type="Texture" id=7]
+[ext_resource path="res://Asset/Item/1x/buttonpress.png" type="Texture" id=8]
 
 [node name="Botton" type="CanvasLayer"]
 
@@ -50,3 +52,11 @@ normal = ExtResource( 6 )
 pressed = ExtResource( 3 )
 passby_press = true
 action = "up"
+
+[node name="Attack" type="TouchScreenButton" parent="Right_control"]
+position = Vector2( -36, 20 )
+scale = Vector2( 1.18151, 1.14445 )
+normal = ExtResource( 7 )
+pressed = ExtResource( 8 )
+passby_press = true
+action = "attack"

@@ -8,6 +8,34 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "EnemiesHitbox",
+"language": "GDScript",
+"path": "res://Sence/EnemiesHitbox.gd"
+}, {
+"base": "Area2D",
+"class": "EnemiesHurtBox",
+"language": "GDScript",
+"path": "res://Sence/EnemiesHurtbox.gd"
+}, {
+"base": "Area2D",
+"class": "MyHitBox",
+"language": "GDScript",
+"path": "res://Sence/MtHitBox.gd"
+}, {
+"base": "Area2D",
+"class": "MyHurtBox",
+"language": "GDScript",
+"path": "res://Sence/MyHurtBox.gd"
+} ]
+_global_script_class_icons={
+"EnemiesHitbox": "",
+"EnemiesHurtBox": "",
+"MyHitBox": "",
+"MyHurtBox": ""
+}
+
 [application]
 
 config/name="07_Project_Advent"
@@ -67,8 +95,8 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_3="Item"
 2d_physics/layer_4="Spike&trap"
 2d_physics/layer_5="Enemy"
-2d_physics/layer_6="Hitbox"
-2d_physics/layer_7="Hurtbox"
+2d_physics/layer_6="HitBox"
+2d_physics/layer_7="HurtBox"
 
 [physics]
 
